@@ -16,6 +16,11 @@ const routes = [
   },
 
   {
+    path: '/dimensions',
+    name: 'Dimensões Cadastradas',
+    component: () => import(/* webpackChunkName: "dimensions" */ '@/views/Dimensions'),
+  },
+  {
     path: '/dimensions/new',
     name: 'Nova Dimensão',
     component: () => import(/* webpackChunkName: "new-dimension" */ '@/views/Dimensions/New'),
