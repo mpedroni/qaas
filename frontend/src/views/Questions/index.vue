@@ -1,6 +1,11 @@
 <template>
   <the-container>
     <card :title="$route.name">
+      <template #toolbar>
+        <v-spacer />
+        <btn color="primary" icon="fas fa-plus" label="Nova Pergunta" to="/questions/new" />
+      </template>
+
       <v-card-text>
         <v-row>
           <v-col cols="12">
@@ -25,6 +30,7 @@
 </template>
 
 <script>
+import Btn from '@/components/QBtn';
 import Card from '@/components/QCard';
 import QSelect from '@/components/QSelect';
 import TheContainer from '@/components/TheContainer';
@@ -34,6 +40,7 @@ export default {
   name: 'Questions',
 
   components: {
+    Btn,
     Card,
     QSelect,
     QuestionList,
