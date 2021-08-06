@@ -5,10 +5,16 @@ Vue.use(VueRouter);
 
 const routes = [
   {
+    path: '/questions',
+    name: 'Perguntas Cadastradas',
+    component: () => import(/* webpackChunkName: "questions" */ '@/views/Questions'),
+  },
+  {
     path: '/questions/new',
     name: 'Nova Pergunta',
     component: () => import(/* webpackChunkName: "new-question" */ '@/views/Questions/New'),
   },
+
   {
     path: '/dimensions/new',
     name: 'Nova Dimensão',
