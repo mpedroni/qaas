@@ -6,6 +6,7 @@
       <v-spacer />
 
       <v-btn text to="/questions/new">Criar Pergunta</v-btn>
+      <v-btn text to="/dimensions/new">Criar Dimensão</v-btn>
     </v-app-bar>
 
     <v-main>

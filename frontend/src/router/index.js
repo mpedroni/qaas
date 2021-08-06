@@ -9,6 +9,11 @@ const routes = [
     name: 'Nova Pergunta',
     component: () => import(/* webpackChunkName: "new-question" */ '@/views/Questions/New'),
   },
+  {
+    path: '/dimensions/new',
+    name: 'Nova Dimensão',
+    component: () => import(/* webpackChunkName: "new-dimension" */ '@/views/Dimensions/New'),
+  },
 ];
 
 const router = new VueRouter({
