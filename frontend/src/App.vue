@@ -1,6 +1,16 @@
 <template>
-  <v-app>
-    <router-view />
+  <v-app id="app">
+    <v-app-bar color="primary" app dark>
+      <v-toolbar-title>qaas</v-toolbar-title>
+
+      <v-spacer />
+
+      <v-btn text to="/questions/new">Criar Pergunta</v-btn>
+    </v-app-bar>
+
+    <v-main>
+      <router-view />
+    </v-main>
   </v-app>
 </template>
 
@@ -9,3 +19,9 @@ export default {
   name: 'App',
 };
 </script>
+
+<style scoped>
+#app {
+  background-color: #eee;
+}
+</style>
