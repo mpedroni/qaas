@@ -4,6 +4,8 @@
       <v-toolbar-title class="grey--text text--darken-3 text-h4 font-weight-bold">
         {{ title }}
       </v-toolbar-title>
+
+      <slot name="toolbar" />
     </v-toolbar>
     <v-card v-bind="$attrs" v-on="$listeners" rounded>
       <slot />
