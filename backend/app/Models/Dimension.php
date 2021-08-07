@@ -14,9 +14,9 @@ class Dimension extends Model
      *
      * @var array
      */
-    protected $fillable = [];
-
-    protected $guardeed = [];
+    protected $fillable = [
+        'name'
+    ];
 
     /**
      * The attributes excluded from the model's JSON form.
