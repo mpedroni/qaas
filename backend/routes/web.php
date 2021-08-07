@@ -19,3 +19,4 @@ $router->get('/', function () use ($router) {
 
 $router->get('/dimensions', 'DimensionController@index');
 $router->post('/dimensions', 'DimensionController@store');
+$router->delete('/dimensions/{id}', 'DimensionController@delete');

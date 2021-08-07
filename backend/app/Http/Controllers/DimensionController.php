@@ -22,13 +22,19 @@ class DimensionController extends Controller
     public function store(Request $request) {
         $name = trim($request->get('name'));
         
-        if(!$name) {
+        if(!$name) 
             return response()->json(['message' => 'O nome da dimensão não pode ser vazio'], 400);
-        }
+        
 
         $dimension = $this->model()::create(['name' => $name]);
 
         return $dimension;
     }
 
+    public function delete($id) {
+        $deletedDimensions = $this->model()::where('id', $id)->delete();
+
+        if(!$deletedDimensions)
+            return response()->json(['message' => 'Ops! Não foi possível deletar essa dimensão.'], 400);
+    }
 }
