@@ -34,7 +34,8 @@ import Btn from '@/components/QBtn';
 import Card from '@/components/QCard';
 import QSelect from '@/components/QSelect';
 import TheContainer from '@/components/TheContainer';
-import QuestionList from './components/QuestionList';
+
+import QuestionList from './components/ListQuestion';
 
 export default {
   name: 'Questions',
@@ -43,8 +44,9 @@ export default {
     Btn,
     Card,
     QSelect,
-    QuestionList,
     TheContainer,
+
+    QuestionList,
   },
 
   data: () => ({

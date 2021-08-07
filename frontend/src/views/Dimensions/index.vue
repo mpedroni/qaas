@@ -17,7 +17,7 @@
 import Btn from '@/components/QBtn';
 import Card from '@/components/QCard';
 import TheContainer from '@/components/TheContainer';
-import DimensionList from './components/DimensionList';
+import DimensionList from './components/ListDimension';
 
 export default {
   name: 'Questions',

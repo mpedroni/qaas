@@ -2,24 +2,13 @@
   <the-container>
     <card :title="$route.name">
       <v-card-text>
-        <v-form v-model="valid" @submit.prevent="submit" ref="form">
-          <v-row justify="center">
-            <v-col cols="12" md="8">
-              <text-input
-                label="Dimensão"
-                placeholder="Ex: Carreira"
-                clearable
-                :rules="[(v) => !!v || 'É necessário definir uma dimensão']"
-              />
-            </v-col>
-          </v-row>
-
+        <form-dimension ref="form" @submit.prevent="submit">
           <v-row justify="center">
             <v-col cols="12" md="8" class="d-flex justify-end">
               <btn label="Salvar" color="primary" icon="$save" :block="mobile" type="submit" />
             </v-col>
           </v-row>
-        </v-form>
+        </form-dimension>
       </v-card-text>
     </card>
   </the-container>
@@ -28,19 +17,25 @@
 <script>
 import Btn from '@/components/QBtn';
 import Card from '@/components/QCard';
-import TextInput from '@/components/QTextInput';
 import TheContainer from '@/components/TheContainer';
+
+import FormDimension from '../components/FormDimension';
 
 export default {
   name: 'NewDimensions',
+
   components: {
     Btn,
     Card,
-    TextInput,
     TheContainer,
+
+    FormDimension,
   },
 
   data: () => ({
+    dimension: {
+      name: '',
+    },
     valid: true,
   }),
 

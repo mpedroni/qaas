@@ -2,35 +2,13 @@
   <the-container>
     <card :title="$route.name">
       <v-card-text>
-        <v-form v-model="valid" @submit.prevent="submit" ref="form">
-          <v-row>
-            <v-col cols="12" md="8">
-              <text-input
-                label="Pergunta"
-                placeholder="Ex: Você prefere trabalhar em home office ou presencial?"
-                clearable
-                :rules="[(v) => !!v || 'É necessário definir uma pergunta']"
-              />
-            </v-col>
-
-            <v-col cols="12" md="4">
-              <q-select
-                label="Dimensão"
-                no-data-text="Nenhuma dimensão encontrada"
-                :items="options"
-                item-value="id"
-                item-text="name"
-                :rules="[(v) => !!v || 'É necessário definir a dimensão da pergunta']"
-              />
-            </v-col>
-          </v-row>
-
+        <form-question ref="form" @submit.prevent="submit">
           <v-row justify="end">
             <v-col cols="12" md="auto">
               <btn label="Salvar" color="primary" icon="$save" :block="mobile" type="submit" />
             </v-col>
           </v-row>
-        </v-form>
+        </form-question>
       </v-card-text>
     </card>
   </the-container>
@@ -39,18 +17,18 @@
 <script>
 import Btn from '@/components/QBtn';
 import Card from '@/components/QCard';
-import QSelect from '@/components/QSelect';
-import TextInput from '@/components/QTextInput';
 import TheContainer from '@/components/TheContainer';
+
+import FormQuestion from '../components/FormQuestion';
 
 export default {
   name: 'NewQuestions',
   components: {
     Btn,
     Card,
-    TextInput,
-    QSelect,
     TheContainer,
+
+    FormQuestion,
   },
 
   data: () => ({
