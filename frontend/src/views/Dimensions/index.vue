@@ -7,39 +7,64 @@
       </template>
 
       <v-card-text>
-        <dimension-list :dimensions="dimensions" />
+        <dimension-list @message="(message, status) => snackbar(message, status)" />
       </v-card-text>
     </card>
+
+    <snackbar ref="snackbar" />
   </the-container>
 </template>
 
 <script>
 import Btn from '@/components/QBtn';
 import Card from '@/components/QCard';
+import Snackbar from '@/components/QSnackbar';
 import TheContainer from '@/components/TheContainer';
+
 import DimensionList from './components/ListDimension';
 
 export default {
-  name: 'Questions',
+  name: 'Dimensions',
+
+  mounted() {
+    this.getDimensions();
+  },
 
   components: {
     Btn,
     Card,
-    DimensionList,
+    Snackbar,
     TheContainer,
+
+    DimensionList,
   },
 
   data: () => ({
-    dimensions: [
-      {
-        id: 1,
-        name: 'Trabalho',
-      },
-      {
-        id: 2,
-        name: 'Bem-Estar',
-      },
-    ],
+    dimensions: [],
+    loading: true,
   }),
+
+  computed: {
+    snackbar() {
+      return this.$refs.snackbar.show;
+    },
+  },
+
+  methods: {
+    async getDimensions() {
+      try {
+        const { data: dimensions } = await this.$api.get('dimensions');
+
+        this.dimensions = dimensions;
+      } catch {
+        this.snackbar(
+          'Algo de errado aconteceu ao carregar as dimensões. Tente novamente',
+          'error'
+        );
+      }
+
+      this.loading = false;
+    },
+  },
 };
 </script>

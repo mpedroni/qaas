@@ -15,6 +15,7 @@
               label="Filtrar por Dimensão"
               no-data-text="Nenhuma dimensão encontrada"
               item-value="id"
+              :loading="!!loading"
               item-text="name"
               clearable
             />
@@ -23,9 +24,15 @@
       </v-card-text>
 
       <v-card-text>
-        <question-list :questions="handleQuestions" />
+        <question-list
+          :filter="filter"
+          :loading.sync="loading"
+          @message="(message, status) => snackbar(message, status)"
+        />
       </v-card-text>
     </card>
+
+    <snackbar ref="snackbar" />
   </the-container>
 </template>
 
@@ -33,6 +40,7 @@
 import Btn from '@/components/QBtn';
 import Card from '@/components/QCard';
 import QSelect from '@/components/QSelect';
+import Snackbar from '@/components/QSnackbar';
 import TheContainer from '@/components/TheContainer';
 
 import QuestionList from './components/ListQuestion';
@@ -44,50 +52,43 @@ export default {
     Btn,
     Card,
     QSelect,
+    Snackbar,
     TheContainer,
 
     QuestionList,
   },
 
+  mounted() {
+    this.getDimensions();
+  },
+
   data: () => ({
-    dimensions: [
-      {
-        id: 1,
-        name: 'Trabalho',
-      },
-      {
-        id: 2,
-        name: 'Bem-Estar',
-      },
-    ],
+    dimensions: [],
     filter: null,
-    questions: [
-      {
-        id: 1,
-        active: true,
-        dimension: {
-          id: 1,
-          name: 'Trabalho',
-        },
-        text: 'Quantos dias na semana você prefere trabalhar em home-office?',
-      },
-      {
-        id: 2,
-        active: false,
-        dimension: {
-          id: 2,
-          name: 'Bem-Estar',
-        },
-        text: 'De 0 a 10, como você avalia a sua disposição para o dia?',
-      },
-    ],
+    loading: 0,
   }),
 
   computed: {
-    handleQuestions() {
-      return this.filter
-        ? this.questions.filter(({ dimension }) => dimension.id === this.filter)
-        : this.questions;
+    snackbar() {
+      return this.$refs.snackbar.show;
+    },
+  },
+
+  methods: {
+    async getDimensions() {
+      this.loading++;
+      try {
+        const { data: dimensions } = await this.$api.get('dimensions');
+
+        this.dimensions = dimensions;
+      } catch {
+        this.snackbar(
+          'Algo de errado aconteceu ao carregar as dimensões. Tente novamente',
+          'error'
+        );
+      }
+
+      this.loading--;
     },
   },
 };

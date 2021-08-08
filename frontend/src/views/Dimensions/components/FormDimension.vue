@@ -1,5 +1,5 @@
 <template>
-  <v-form v-model="valid" v-bind="$attrs" v-on="$listeners" ref="form">
+  <v-form v-model="valid" v-bind="$attrs" @submit="$listeners.submit" ref="form">
     <v-row justify="center">
       <v-col cols="12" md="8">
         <text-input

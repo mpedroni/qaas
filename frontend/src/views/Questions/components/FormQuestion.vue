@@ -1,5 +1,5 @@
 <template>
-  <v-form v-model="valid" v-bind="$attrs" v-on="$listeners" ref="form">
+  <v-form v-model="valid" v-bind="$attrs" ref="form" @submit="$listeners.submit">
     <v-row>
       <v-col cols="12" md="8">
         <text-input
@@ -16,10 +16,11 @@
           v-model="question.dimension"
           label="Dimensão"
           no-data-text="Nenhuma dimensão encontrada"
-          :items="options"
-          item-value="id"
+          :items="dimensions"
+          :loading="loading"
           item-text="name"
-          :rules="[(v) => !!v || 'É necessário definir a dimensão da pergunta']"
+          return-object
+          :rules="[(v) => !!(v && v.id) || 'É necessário definir a dimensão da pergunta']"
         />
       </v-col>
     </v-row>
@@ -43,17 +44,17 @@ export default {
   props: {
     value: {
       type: Object,
-      default: () => ({}),
+      required: true,
     },
   },
 
+  mounted() {
+    this.getDimensions();
+  },
+
   data: () => ({
-    options: [
-      {
-        id: 1,
-        name: 'Trabalho',
-      },
-    ],
+    dimensions: [],
+    loading: true,
     valid: true,
   }),
 
@@ -70,6 +71,22 @@ export default {
   },
 
   methods: {
+    async getDimensions() {
+      this.loading = true;
+      try {
+        const { data: dimensions } = await this.$api.get('dimensions');
+
+        this.dimensions = dimensions;
+      } catch {
+        this.snackbar(
+          'Algo de errado aconteceu ao carregar as dimensões. Tente novamente',
+          'error'
+        );
+      }
+
+      this.loading = false;
+    },
+
     validate() {
       return this.$refs.form.validate();
     },
