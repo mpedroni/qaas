@@ -16,9 +16,12 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
             $table->text('text');
-            $table->boolean('active');
-            $table->boolean('deleted');
-            $table->foreignId('dimension_id')->constrained();
+            $table->foreignId('dimension_id')
+                ->nullable()
+                ->constrained()
+                ->nullOnDelete();
+            $table->boolean('active')->default(1);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
