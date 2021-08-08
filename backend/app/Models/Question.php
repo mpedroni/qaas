@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Dimension extends Model
+class Question extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+
+    protected $with = ['dimension'];
 
     /**
      * The attributes that are mass assignable.
@@ -15,7 +18,10 @@ class Dimension extends Model
      * @var array
      */
     protected $fillable = [
-        'name'
+        'text',
+        'dimension_id',
+        'active',
+        'deleted'
     ];
 
     /**
@@ -25,10 +31,12 @@ class Dimension extends Model
      */
     protected $hidden = [
         'created_at',
-        'updated_at'
+        'updated_at',
+        'deleted_at',
+        'dimension_id'
     ];
 
-    public function question() {
-        return $this->hasMany(Question::class);
+    public function dimension() {
+        return $this->belongsTo(Dimension::class);
     }
 }

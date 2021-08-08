@@ -18,5 +18,13 @@ $router->get('/', function () use ($router) {
 });
 
 $router->get('/dimensions', 'DimensionController@index');
+$router->get('/dimensions/{id}', 'DimensionController@find');
 $router->post('/dimensions', 'DimensionController@store');
+$router->put('/dimensions/{id}', 'DimensionController@update');
 $router->delete('/dimensions/{id}', 'DimensionController@delete');
+
+$router->get('/questions', 'QuestionController@index');
+$router->get('/questions/{id}', 'QuestionController@find');
+$router->post('/questions', 'QuestionController@store');
+$router->put('/questions/{id}', 'QuestionController@update');
+$router->delete('/questions/{id}', 'QuestionController@delete');
