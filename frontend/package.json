@@ -10,6 +10,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.3",
     "@fortawesome/free-regular-svg-icons": "^5.15.3",
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "eslint-config-airbnb-base": "^14.2.1",
     "vue": "^2.6.11",
