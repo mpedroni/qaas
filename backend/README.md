@@ -1,24 +1,38 @@
-# Lumen PHP Framework
+# qaas
+## backend da aplicação
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://img.shields.io/packagist/dt/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://img.shields.io/packagist/v/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://img.shields.io/packagist/l/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
+### Requisitos
+* PHP >= v7.4
+* Composer v2.*
+* MySQL v5.7
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+### Instalação
+* Depois de clonar o repositório, entre no diretório do projeto e instale as dependencias:
+```sh
+composer install
+```
 
-## Official Documentation
+> Nessa etapa, o banco de dados já deve estar criado. As configurações de conexão com o banco de dados devem estar em um arquivo `.env` na raiz da aplicação contendo as variáveis descritas no arquivo de exemplo `.env.example`
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+* Depois de instalar as dependencias, rode as migrations para criar as tabelas necessárias no banco de dados:
+```sh
+php artisan migrate
+```
+> As seguintes tabelas serão criadas no banco de dados:
 
-## Contributing
+| questions    | dimensions |
+| ---          | ---        |
+| id           | id         |
+| text         | name       |
+| dimension_id | created_at |
+| active       | updated_at |
+| deleted_at   |            |
+| created_at   |            |
+| updated_at   |            |
 
-Thank you for considering contributing to Lumen! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+* Inicie a aplicação:
+```sh
+ php -S <url:port> -t public
+```
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+* Após isso, aplicação ficará disponível na `url:port` definidas.
